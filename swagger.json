@@ -1,0 +1,119 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NotificationGateway.Emails.API",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "/api/v{v}/emailnotifications/message": {
+      "post": {
+        "tags": [
+          "EmailNotification"
+        ],
+        "parameters": [
+          {
+            "name": "v",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailMessageDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailMessageDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailMessageDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmailMessageDto": {
+        "type": "object",
+        "properties": {
+          "ApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "InitiatorType": {
+            "type": "string",
+            "nullable": true
+          },
+          "Subject": {
+            "type": "string",
+            "nullable": true
+          },
+          "Message": {
+            "nullable": true
+          },
+          "ToEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "CcEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "NotificationTemplateName": {
+            "type": "string",
+            "nullable": true
+          },
+          "LanguageId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PriorityId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ExpiryTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme.",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
